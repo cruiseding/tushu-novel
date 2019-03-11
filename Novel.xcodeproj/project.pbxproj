@@ -1494,7 +1494,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Novel/Classes/Vender/SDKFiles/WechatPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lfq.novel;
+				PRODUCT_BUNDLE_IDENTIFIER = mafasha.zj.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1526,7 +1526,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Novel/Classes/Vender/SDKFiles/WechatPay",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lfq.novel;
+				PRODUCT_BUNDLE_IDENTIFIER = mafasha.zj.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

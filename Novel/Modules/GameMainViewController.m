@@ -8,7 +8,7 @@
 
 #import "GameMainViewController.h"
 
-@interface GameMainViewController() <UINavigationControllerDelegate>
+@interface GameMainViewController() <WKNavigationDelegate>
 
 @end
 
@@ -19,7 +19,6 @@
     
     [self allocWebView];
     [self.view addSubview:_webView];
-    _webView.scalesPageToFit = YES;
     
     self.canRotate = YES;
     self.isLandscape = YES;
@@ -95,11 +94,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIWebView *)allocWebView   {
+- (WKWebView *)allocWebView   {
     if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-        _webView.dataDetectorTypes = UIDataDetectorTypeAll;
+        _webView = [[WKWebView alloc]initWithFrame:self.view.bounds];
+        [_webView setUserInteractionEnabled:YES];
         _webView.scrollView.bounces = NO;
+        [_webView setOpaque:YES];
+        self.webView.navigationDelegate = self;
     }
     return _webView;
 }
@@ -114,6 +115,37 @@
     
     // 3. 发送请求给服务器
     [self.webView loadRequest:request];
+}
+
+#pragma mark - Delegate
+#pragma mark - WKNavigation Delegate
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    NSURLRequest *request        = navigationAction.request;
+    NSString     *scheme         = [request.URL scheme];
+    // decode for all URL to avoid url contains some special character so that it wasn't load.
+    NSString     *absoluteString = [navigationAction.request.URL.absoluteString stringByRemovingPercentEncoding];
+    NSLog(@"Current URL is %@",absoluteString);
+    
+    static NSString *endPayRedirectURL = nil;
+    // Judge is whether to jump to other app.
+    if (![scheme isEqualToString:@"https"] && ![scheme isEqualToString:@"http"]) {
+        decisionHandler(WKNavigationActionPolicyCancel);
+        if ([scheme isEqualToString:@"weixin"]) {
+            // The var endPayRedirectURL was our saved origin url's redirect address. We need to load it when we return from wechat client.
+            if (endPayRedirectURL) {
+                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:endPayRedirectURL] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10]];
+            }
+        }
+        
+        BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:request.URL];
+        if (canOpen) {
+            [[UIApplication sharedApplication] openURL:request.URL];
+        }
+        return;
+    }
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 @end

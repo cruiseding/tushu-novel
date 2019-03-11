@@ -11,7 +11,7 @@
 
 @interface GameMainViewController : BaseViewController
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) NSString *websiteUrl;
 

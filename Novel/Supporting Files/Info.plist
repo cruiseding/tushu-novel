@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>屠书</string>
+	<string>玛法沙巴克</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,6 +20,11 @@
 	<string>1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>alipay</string>
+		<string>weixin</string>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>11</string>
 	<key>LSRequiresIPhoneOS</key>

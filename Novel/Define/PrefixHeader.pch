@@ -30,6 +30,7 @@
 #import "FMDB.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import <WebKit/WebKit.h>
 
 //定义
 #import "NotificationMacro.h"
