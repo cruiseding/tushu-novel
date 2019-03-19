@@ -21,7 +21,7 @@
     [self.view addSubview:_webView];
     
     self.canRotate = YES;
-    self.isLandscape = YES;
+    self.isLandscape = NO;
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -66,7 +66,7 @@
 
 - (void)registCrossScreen {
     self.canRotate = YES;
-    self.isLandscape = YES;
+    self.isLandscape = NO;
     [self interfaceOrientation:UIInterfaceOrientationLandscapeRight];
 }
 
